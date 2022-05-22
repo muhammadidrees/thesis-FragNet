@@ -7,10 +7,10 @@ import pickle
 from torchvision.transforms import Compose, ToTensor
 import random
 
-class DataFromFolder(Dataset):
+class DatasetFromFolder(Dataset):
     
-    def __init__(self, dataset, folderName, labelFolder, imgtype = 'png', scale_size = (64, 128), is_training=True):
-        super(DataFromFolder, self).__init__()
+    def __init__(self, dataset, foldername, labelfolder, imgtype = 'png', scale_size = (64, 128), is_training=True):
+        super(DatasetFromFolder, self).__init__()
 
         self.cerug = dataset == 'CERUG-EN'
         
@@ -18,7 +18,7 @@ class DataFromFolder(Dataset):
         
         self.imgtype = imgtype
         self.scale_size = scale_size
-        self.folder = folderName
+        self.folder = foldername
         self.dataset = dataset
         
         if self.dataset == 'CERUG-EN':
@@ -26,7 +26,7 @@ class DataFromFolder(Dataset):
         else:
             self.cerug = False
         
-        self.labelidx_name = labelFolder + dataset + 'writer_index_table.pickle'
+        self.labelidx_name = labelfolder + dataset + 'writer_index_table.pickle'
         print(self.labelidx_name)
         
         self.imglist = self._get_image_list(self.folder)
